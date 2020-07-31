@@ -12,7 +12,7 @@
 i=0
 
 for benchmark in Pereira2018-encoding ; do
-  for arch/gpt2/head/L_0 arch/gpt2/head/L_5 arch/gpt2/head/L_8 arch/gpt2/head/L_9  ; do
+  for model in arch/gpt2/head/L_0 arch/gpt2/head/L_5 arch/gpt2/head/L_8 arch/gpt2/head/L_9  ; do
 
     model_list[$i]="$model"
     benchmark_list[$i]="$benchmark"
