@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=gpt_ablate
-#SBATCH --array=0-13
+#SBATCH --array=0-1
 #SBATCH --time=96:00:00
 #SBATCH --ntasks=1
 #SBATCH --mem=267G
@@ -12,11 +12,11 @@
 i=0
 
 for benchmark in Pereira2018-encoding ; do
-for model in arch/gpt2/head/L_None  \
-  arch/gpt2/head/L_0 arch/gpt2/head/L_1 arch/gpt2/head/L_2 arch/gpt2/head/L_3  \
-  arch/gpt2/head/L_4 arch/gpt2/head/L_5 arch/gpt2/head/L_6 arch/gpt2/head/L_7  \
-  arch/gpt2/head/L_8 arch/gpt2/head/L_9 arch/gpt2/head/L_10 arch/gpt2/head/L_11  \
-  arch/gpt2/head/L_all  ; do
+for model in arch/gpt2/head/L_all ; do #arch/gpt2/head/L_None  \
+  #arch/gpt2/head/L_0 arch/gpt2/head/L_1 arch/gpt2/head/L_2 arch/gpt2/head/L_3  \
+  #arch/gpt2/head/L_4 arch/gpt2/head/L_5 arch/gpt2/head/L_6 arch/gpt2/head/L_7  \
+  #arch/gpt2/head/L_8 arch/gpt2/head/L_9 arch/gpt2/head/L_10 arch/gpt2/head/L_11  \
+
   model_list[$i]="$model"
   benchmark_list[$i]="$benchmark"
   i=$[$i + 1]
