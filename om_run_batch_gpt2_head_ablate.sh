@@ -1,27 +1,35 @@
 #!/bin/bash
 
 #SBATCH --job-name=gpt_ablate
-#SBATCH --array=0-3
-#SBATCH --time=96:00:00
+#SBATCH --array=0-23
+#SBATCH --time=3-12:00:00
 #SBATCH --ntasks=1
-#SBATCH --mem=267G
+#SBATCH --mem=180G
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=ehoseini@mit.edu
 
-
+LAYERS=$(seq 0 11)
 i=0
-
-for benchmark in Pereira2018-encoding ; do
-  for model in arch/gpt2/head/L_0 arch/gpt2/head/L_5 arch/gpt2/head/L_8 arch/gpt2/head/L_9  ; do
-
-    model_list[$i]="$model"
-    benchmark_list[$i]="$benchmark"
+for layer in ${LAYERS[@]} ; do
+  for n_ablate in 3 9 ; do
+    model_name[$i]="arch/gpt2/head/L_$layer/H_$n_ablate"
     i=$[$i + 1]
   done
 done
 
-#echo ${#model_list[@]}
-#exit
+i=0
+
+for benchmark in Pereira2018-encoding ; do
+  for model in ${model_name[@]}  ; do
+   model_list[$i]="$model"
+   benchmark_list[$i]="$benchmark"
+
+   echo ${model_list[$i]}
+   echo ${benchmark_list[$i]}
+   i=$[$i + 1]
+  done
+done
+
 
 echo "My SLURM_ARRAY_TASK_ID: " $SLURM_ARRAY_TASK_ID
 echo "Running model ${model_list[$SLURM_ARRAY_TASK_ID]}"
