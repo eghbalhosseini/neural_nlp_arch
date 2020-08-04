@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=gpt_ablate
-#SBATCH --array=0-27
+#SBATCH --array=0-83
 #SBATCH --time=3-12:00:00
 #SBATCH --ntasks=1
 #SBATCH --mem=180G
@@ -12,13 +12,16 @@ LAYERS=$(seq 0 11)
 LAYERS+=("all")
 LAYERS+=("None")
 i=0
-for layer in ${LAYERS[@]} ; do
-  for n_ablate in 3 9 ; do
-    model_name[$i]="arch/gpt2/head/L_$layer/H_$n_ablate"
-    i=$[$i + 1]
+for trained in "" "-untrained" ; do
+  for layer in ${LAYERS[@]} ; do
+    for n_ablate in 3 6 9 ; do
+      model_name[$i]="arch/gpt2/head/L_$layer/H_$n_ablate$trained"
+      echo ${model_name[$i]}
+      i=$[$i + 1]
+    done
   done
 done
-
+echo $i
 i=0
 for benchmark in Pereira2018-encoding ; do
   for model in ${model_name[@]}  ; do
