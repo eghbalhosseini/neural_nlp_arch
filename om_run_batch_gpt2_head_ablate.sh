@@ -9,6 +9,8 @@
 #SBATCH --mail-user=ehoseini@mit.edu
 
 LAYERS=$(seq 0 11)
+LAYERS+=("all")
+LAYERS+=("None")
 i=0
 for layer in ${LAYERS[@]} ; do
   for n_ablate in 3 9 ; do
@@ -18,7 +20,6 @@ for layer in ${LAYERS[@]} ; do
 done
 
 i=0
-
 for benchmark in Pereira2018-encoding ; do
   for model in ${model_name[@]}  ; do
    model_list[$i]="$model"
