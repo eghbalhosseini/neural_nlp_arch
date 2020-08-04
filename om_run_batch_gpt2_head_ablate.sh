@@ -24,9 +24,6 @@ for benchmark in Pereira2018-encoding ; do
   for model in ${model_name[@]}  ; do
    model_list[$i]="$model"
    benchmark_list[$i]="$benchmark"
-
-   echo ${model_list[$i]}
-   echo ${benchmark_list[$i]}
    i=$[$i + 1]
   done
 done
