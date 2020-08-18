@@ -14,8 +14,8 @@ LAYERS+=("None")
 i=0
 for trained in "" "-untrained" ; do
   for layer in ${LAYERS[@]} ; do
-    for n_ablate in 3 6 9 ; do
-      model_name[$i]="arch/gpt2/head/L_$layer/H_$n_ablate$trained"
+    for n_ablate in 3  ; do
+      model_name[$i]="arch/gpt2/head_static/L_$layer/H_$n_ablate$trained"
       echo ${model_name[$i]}
       i=$[$i + 1]
     done
@@ -44,4 +44,3 @@ XDG_CACHE_HOME=/om/user/`whoami`/st
 export XDG_CACHE_HOME
 
 singularity exec -B /om:/om /om/user/`whoami`/simg_images/neural_nlp_fz.simg python ~/neural-nlp/neural_nlp run --model "${model_list[$SLURM_ARRAY_TASK_ID]}" --benchmark "${benchmark_list[$SLURM_ARRAY_TASK_ID]}"
-
