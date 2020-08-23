@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=gpt_ablate
-#SBATCH --array=0-167%20
+#SBATCH --array=0-215%25
 #SBATCH --time=4-12:00:00
 #SBATCH --ntasks=1
 #SBATCH --mem=120G
@@ -15,7 +15,7 @@ i=0
 for trained in "" "-untrained" ; do
   for layer in ${LAYERS[@]} ; do
     for ablate_type in 'head_first' 'head_last' 'head_static' ; do
-      for n_ablate in 6 9  ; do
+      for n_ablate in 6 3 9  ; do
         model_name[$i]="arch/gpt2/$ablate_type/L_$layer/H_$n_ablate$trained"
         i=$[$i + 1]
       done
