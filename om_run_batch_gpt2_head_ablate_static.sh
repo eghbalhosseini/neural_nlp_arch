@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --job-name=gpt_ablate
-#SBATCH --array=0-83%50
+#SBATCH --array=0-1%2
 #SBATCH --time=4-12:00:00
 #SBATCH --ntasks=1
 #SBATCH --mem=120G
