@@ -2,7 +2,7 @@
 
 #SBATCH --job-name=gpt_ablate
 #SBATCH --array=0-1%2
-#SBATCH --time=4-12:00:00
+#SBATCH --time=12:00:00
 #SBATCH --ntasks=1
 #SBATCH --mem=120G
 #SBATCH --mail-type=ALL
