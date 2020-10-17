@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #SBATCH --job-name=gpt_ablate
-#SBATCH --array=0-1%2
-#SBATCH --time=12:00:00
+#SBATCH --array=0-83
+#SBATCH --time=1-12:00:00
 #SBATCH --ntasks=1
 #SBATCH --mem=120G
 #SBATCH --mail-type=ALL
@@ -26,7 +26,7 @@ done
 echo $i
 
 i=0
-for benchmark in Fedorenko2016v3-encoding ; do
+for benchmark in Pereira2018-encoding ; do
 #Pereira2018-encoding ; do
   for model in ${model_name[@]}  ; do
    model_list[$i]="$model"
