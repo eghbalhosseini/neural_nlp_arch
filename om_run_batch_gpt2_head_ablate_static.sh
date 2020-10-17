@@ -6,6 +6,7 @@
 #SBATCH --ntasks=1
 #SBATCH --mem=120G
 #SBATCH --mail-type=ALL
+#SBATCH --exclude node017,node018
 #SBATCH --mail-user=ehoseini@mit.edu
 
 LAYERS=$(seq 0 11)
